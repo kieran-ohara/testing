@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">{{ label }}</button>
+  <button type="button" :class="classes" @click="onClick" :style="style">{{ context.partner }}</button>
 </template>
 
 <script>
@@ -7,6 +7,7 @@ import './button.css';
 import { reactive, computed } from 'vue';
 
 export default {
+  inject: ['context'],
   name: 'my-button',
 
   props: {

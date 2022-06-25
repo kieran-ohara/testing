@@ -1,7 +1,11 @@
 <script setup>
+import { provide, readonly, reactive } from 'vue';
+const state = reactive({
+  partner: 'moneysupermarket'
+})
+provide('context', readonly(state));
 </script>
 
 <template>
-  <p>CONTEXT!</p>
   <slot></slot>
 </template>
