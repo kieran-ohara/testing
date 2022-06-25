@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">{{ context.partner }}</button>
+  <button type="button" :class="classes" @click="onClick" :style="style">{{ context.contextPartner }}</button>
 </template>
 
 <script>
