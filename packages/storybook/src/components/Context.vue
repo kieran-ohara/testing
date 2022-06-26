@@ -1,5 +1,7 @@
 <script setup>
-import './context.css';
+import './partners/bionic.css';
+import './partners/default.css';
+import './partners/moneysupermarket.css';
 
 import { provide, readonly, reactive } from 'vue';
 const props = defineProps([

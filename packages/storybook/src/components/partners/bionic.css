@@ -1,0 +1,7 @@
+[partner=bionic] {
+  --button-primary-background-color: #ed653f;
+  --button-primary-color: white;
+
+  --button-secondary-background-color: white;
+  --button-secondary-color: grey;
+}

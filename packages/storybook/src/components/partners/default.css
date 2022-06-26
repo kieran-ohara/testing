@@ -1,0 +1,7 @@
+[partner=default] {
+  --button-primary-background-color: #1ea7fd;
+  --button-primary-color: white;
+
+  --button-secondary-background-color: white;
+  --button-secondary-color: #1ea7fd;
+}
