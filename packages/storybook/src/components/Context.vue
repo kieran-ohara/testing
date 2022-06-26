@@ -1,20 +1,19 @@
 <script setup>
 import { provide, readonly, reactive } from 'vue';
 const props = defineProps([
-  'contextpartner',
+  'overridepartner',
   'static'
 ])
 
-const response = await fetch(`http://localhost:3000`);
+const response = await fetch(`http://localhost:3000?` + new URLSearchParams({
+  overridepartner: props.overridepartner,
+}));
 const json = await response.json();
 
 const state = reactive({
   partner: json.partner,
-  contextPartner: props.contextpartner
 })
 provide('context', readonly(state));
-console.log(`static prop is: ${props.static}`);
-console.log(`context partner is: ${props.contextpartner}`);
 </script>
 
 <template>

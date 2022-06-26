@@ -17,7 +17,7 @@ const ContextDecorator = (story, {globals: context}) => ({
     }
   },
   components: { Context },
-  template: '<Context :contextpartner="context.partner" static="staticValue" ><story/></Context>'
+  template: '<Context :overridepartner="context.partner" static="staticValue" ><story/></Context>'
 })
 
 import Suspense from '../src/components/Suspense.vue';
