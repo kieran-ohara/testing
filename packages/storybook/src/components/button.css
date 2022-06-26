@@ -30,27 +30,3 @@
   font-size: 16px;
   padding: 12px 24px;
 }
-
-:root, [partner=default] {
-  --button-primary-background-color: #1ea7fd;
-  --button-primary-color: white;
-
-  --button-secondary-background-color: white;
-  --button-secondary-color: #1ea7fd;
-}
-
-[partner=moneysupermarket] {
-  --button-primary-background-color: #590f85;
-  --button-primary-color: white;
-
-  --button-secondary-background-color: white;
-  --button-secondary-color: rgb(89, 15, 133);
-}
-
-[partner=bionic] {
-  --button-primary-background-color: #ed653f;
-  --button-primary-color: white;
-
-  --button-secondary-background-color: white;
-  --button-secondary-color: grey;
-}

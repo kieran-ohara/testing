@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import './button.css';
 import { reactive, computed } from 'vue';
+import '../components/button.css';
 
 export default {
   inject: ['context'],
