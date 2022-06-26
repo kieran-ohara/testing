@@ -4,7 +4,7 @@
 
 <script>
 import { reactive, computed } from 'vue';
-import '../components/button.css';
+import './button.css';
 
 export default {
   inject: ['context'],
