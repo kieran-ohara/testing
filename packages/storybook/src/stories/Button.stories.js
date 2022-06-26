@@ -15,7 +15,6 @@ export default {
   },
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
     onClick: {},
     size: {
       control: { type: 'select' },

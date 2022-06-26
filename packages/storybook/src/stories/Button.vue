@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">{{ context.partner }}</button>
+  <button type="button" :class="classes" @click="onClick" :style="style">{{ label }}</button>
 </template>
 
 <script>
@@ -25,9 +25,6 @@ export default {
         return ['small', 'medium', 'large'].indexOf(value) !== -1;
       },
     },
-    backgroundColor: {
-      type: String,
-    },
   },
 
   emits: ['click'],
@@ -40,9 +37,6 @@ export default {
         'storybook-button--primary': props.primary,
         'storybook-button--secondary': !props.primary,
         [`storybook-button--${props.size || 'medium'}`]: true,
-      })),
-      style: computed(() => ({
-        backgroundColor: props.backgroundColor,
       })),
       onClick() {
         emit('click');

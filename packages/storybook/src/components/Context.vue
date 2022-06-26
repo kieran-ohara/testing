@@ -17,5 +17,7 @@ provide('context', readonly(state));
 </script>
 
 <template>
-  <slot></slot>
+  <div :partner="state.partner">
+    <slot></slot>
+  </div>
 </template>
