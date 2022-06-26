@@ -20,7 +20,13 @@ const ContextDecorator = (story, {globals: context}) => ({
   template: '<Context :contextpartner="context.partner" static="staticValue" ><story/></Context>'
 })
 
-export const decorators = [ContextDecorator];
+import Suspense from '../src/components/Suspense.vue';
+const SuspenseDecorator = () => ({
+  components: { Suspense },
+  template: '<Suspense><story/></Suspense>'
+})
+
+export const decorators = [ ContextDecorator, SuspenseDecorator ];
 
 export const globalTypes = {
   partner: {

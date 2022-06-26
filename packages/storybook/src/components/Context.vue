@@ -1,7 +1,7 @@
 <script setup>
 import { provide, readonly, reactive } from 'vue';
-/* const response = await fetch('http://localhost:3000'); */
-/* const json = await response.json(); */
+const response = await fetch('http://localhost:3000');
+const json = await response.json();
 const props = defineProps([
   'contextpartner',
   'static'
