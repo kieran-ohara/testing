@@ -43,8 +43,8 @@ Primary.args = {
   label: 'Button',
 };
 
-export const SecondaryTits = Template.bind({});
-SecondaryTits.args = {
+export const Secondary = Template.bind({});
+Secondary.args = {
   label: 'lol',
 };
 
