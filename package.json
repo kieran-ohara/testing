@@ -18,5 +18,6 @@
   "homepage": "https://github.com/kieran-ohara/testing#readme",
   "workspaces": [
     "packages/storybook",
+    "packages/config"
   ]
 }
