@@ -1,23 +1,30 @@
 {
-  "name": "testing",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "forms",
+  "version": "0.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kieran-ohara/testing.git"
+  "dependencies": {
+    "@formkit/vue": "^1.0.0-beta.8",
+    "vue": "^3.2.36"
   },
-  "author": "s",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kieran-ohara/testing/issues"
-  },
-  "homepage": "https://github.com/kieran-ohara/testing#readme",
-  "workspaces": [
-    "packages/storybook",
-    "packages/config"
-  ]
+  "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@mdx-js/react": "^1.6.22",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-vite": "^0.1.36",
+    "@storybook/testing-library": "^0.0.13",
+    "@storybook/vue3": "^6.5.9",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "babel-loader": "^8.2.5",
+    "vite": "^2.9.9",
+    "vue-loader": "^16.8.3"
+  }
 }

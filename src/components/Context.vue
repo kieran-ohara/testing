@@ -9,13 +9,22 @@ const props = defineProps([
   'static'
 ])
 
-const response = await fetch(`http://localhost:3000?` + new URLSearchParams({
-  overridepartner: props.overridepartner,
-}));
+const httpBinResponse = {
+  "partner": props.overridepartner
+}
+
+const response = await fetch(`https://httpbin.org/post`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(httpBinResponse)
+});
+
 const json = await response.json();
 
 const state = reactive({
-  partner: json.partner,
+  partner: json.json.partner,
 })
 provide('context', readonly(state));
 </script>
