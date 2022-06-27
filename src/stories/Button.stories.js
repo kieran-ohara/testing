@@ -4,15 +4,7 @@ import MyButton from '../components/Button.vue';
 export default {
   title: 'Example/Button',
   component: MyButton,
-  parameters: {
-    backgrounds: {
-      values: [
-        { name: 'red', value: '#f00' },
-        { name: 'green', value: '#0f0' },
-        { name: 'blue', value: '#00f' },
-      ],
-    },
-  },
+  parameters: { },
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     onClick: {},
