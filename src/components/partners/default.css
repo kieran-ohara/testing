@@ -1,7 +1,13 @@
-[partner=default] {
+[partner=default], :root {
+  --button-border-radius: 3em;
+  --button-border: 1px solid;
+
   --button-primary-background-color: #1ea7fd;
   --button-primary-color: white;
 
   --button-secondary-background-color: white;
+  --button-secondary-border: 1px solid;
   --button-secondary-color: #1ea7fd;
+
+  --button-large-padding: 12px 24px;
 }

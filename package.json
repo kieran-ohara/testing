@@ -26,6 +26,7 @@
     "@vitejs/plugin-vue": "^2.3.3",
     "babel-loader": "^8.2.5",
     "chromatic": "^6.6.4",
+    "postcss-nesting": "^10.1.9",
     "vite": "^2.9.9",
     "vue-loader": "^16.8.3"
   },

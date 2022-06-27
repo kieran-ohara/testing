@@ -1,7 +1,15 @@
 [partner=bionic] {
-  --button-primary-background-color: #ed653f;
+  --button-border-radius: 6px;
+  --button-border: none;
+
+  --button-primary-background-color: #1370FF;
   --button-primary-color: white;
+  --button-primary-hover-background-color: #005DED;
+  --button-primary-hover-color: white;
 
   --button-secondary-background-color: white;
-  --button-secondary-color: grey;
+  --button-secondary-border: 2px solid #1370FF;
+  --button-secondary-color: #1370FF;
+
+  --button-large-padding: 12px 24px;
 }
