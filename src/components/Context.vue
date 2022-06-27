@@ -26,7 +26,8 @@ const json = await response.json();
 const state = reactive({
   partner: json.json.partner,
 })
-provide('context', readonly(state));
+// dont actually need this
+/* provide('context', readonly(state)); */
 </script>
 
 <template>
