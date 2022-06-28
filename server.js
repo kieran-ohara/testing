@@ -1,62 +1,82 @@
+const express = require('express');
+const vite = require('vite');
+const { readFileSync } = require('fs');
+const path = require('path');
 
-const fs = require('fs')
-const path = require('path')
-const express = require('express')
-const { createServer: createViteServer } = require('vite')
+const resolve = (p) => path.resolve(__dirname, p)
 
-async function createServer() {
-  const app = express()
+const createDevelopmentServer = async (server) => {
+  const viteServer = await vite.createServer({
+    root: process.cwd(),
+    logLevel: 'info',
+    server: {
+      middlewareMode: 'ssr',
+      watch: {
+        usePolling: true,
+        interval: 100
+      }
+    },
+  });
+  server.use(viteServer.middlewares);
 
-  // Create Vite server in middleware mode. This disables Vite's own HTML
-  // serving logic and let the parent server take control.
-  //
-  // In middleware mode, if you want to use Vite's own HTML serving logic
-  // use `'html'` as the `middlewareMode` (ref https://vitejs.dev/config/#server-middlewaremode)
-  const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' }
-  })
-  // use vite's connect instance as middleware
-  app.use(vite.middlewares)
+  server.use('*', async (req, res, next) => {
+    try {
+      const url = req.originalUrl;
 
-app.use('*', async (req, res, next) => {
-  const url = req.originalUrl
+      let template = readFileSync(resolve('index.html'), 'utf-8');
+      template = await viteServer.transformIndexHtml(url, template);
+      const manifest = {}
 
-  try {
-    // 1. Read index.html
-    let template = fs.readFileSync(
-      path.resolve(__dirname, 'index.html'),
-      'utf-8'
-    )
+      const { render } = await viteServer.ssrLoadModule(resolve('src/entry-server.ts'))
+      const [appHtml, preloadedLinks] = await render(url, manifest);
 
-    // 2. Apply Vite HTML transforms. This injects the Vite HMR client, and
-    //    also applies HTML transforms from Vite plugins, e.g. global preambles
-    //    from @vitejs/plugin-react
-    template = await vite.transformIndexHtml(url, template)
+      const html = template
+        .replace('<!--ssr-render-->', appHtml)
+        .replace('<!--preload-links-->', preloadedLinks);
 
-    // 3. Load the server entry. vite.ssrLoadModule automatically transforms
-    //    your ESM source code to be usable in Node.js! There is no bundling
-    //    required, and provides efficient invalidation similar to HMR.
-    const { render } = await vite.ssrLoadModule('./src/entry-server.ts')
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+    } catch (e) {
+      viteServer.ssrFixStacktrace(e);
+      next(e);
+    }
+  });
 
-    // 4. render the app HTML. This assumes entry-server.js's exported `render`
-    //    function calls appropriate framework SSR APIs,
-    //    e.g. ReactDOMServer.renderToString()
-    const appHtml = await render(url)
-
-    // 5. Inject the app-rendered HTML into the template.
-    const html = template.replace(`<!--ssr-outlet-->`, appHtml)
-
-    // 6. Send the rendered HTML back.
-    res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
-  } catch (e) {
-    // If an error is caught, let Vite fix the stracktrace so it maps back to
-    // your actual source code.
-    vite.ssrFixStacktrace(e)
-    next(e)
-  }
-})
-
-  app.listen(3000)
+  return server;
 }
 
-createServer()
+const createProductionServer = async (server) => {
+  server.use(express.static('dist/client'));
+
+  server.use('*', async (req, res, next) => {
+    const url = req.originalUrl;
+
+    const template = readFileSync(resolve('${__dist/client/index.html'), 'utf-8');
+    const manifest = require(resolve('${__dist/client/ssr-manifest.json'));
+
+    const { render } = require(resolve('${__dist/server/entry-server.js'));
+    const [appHtml, preloadedLinks] = await render(url, manifest);
+
+    const html = template
+      .replace('<!--ssr-render-->', appHtml)
+      .replace('<!--preload-links-->', preloadedLinks);
+
+    res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+  });
+
+  return server;
+}
+
+const createServer = async () => {
+  const server = express();
+
+  const isProduction = process.env.NODE_ENV === 'production';
+  if (isProduction) {
+    await createProductionServer(server);
+  } else {
+    await createDevelopmentServer(server);
+  }
+
+  return server;
+}
+
+module.exports = { createServer };

@@ -7,7 +7,9 @@
     "preview": "vite preview --port 4173",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=0f06ccc299f6"
+    "chromatic": "npx chromatic --project-token=0f06ccc299f6",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --outDir dist/server --ssr src/entry-server.ts "
   },
   "dependencies": {
     "@formkit/vue": "^1.0.0-beta.8",
