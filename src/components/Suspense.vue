@@ -5,7 +5,6 @@ import { Suspense } from 'vue';
 <template>
   <Suspense>
     <template #fallback>
-      <p>loading</p>
     </template>
     <template #default>
       <slot></slot>

@@ -32,7 +32,7 @@ export const globalTypes = {
   partner: {
     name: 'partner',
     description: 'Internationalization locale',
-    defaultValue: 'default',
+    defaultValue: 'bionic',
     toolbar: {
       icon: 'paintbrush',
       items: [
