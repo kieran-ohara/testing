@@ -1,5 +1,5 @@
 <script setup>
-import './partners/bionic.css';
+import './partners/bionic.scss';
 import './partners/default.css';
 import './partners/moneysupermarket.css';
 

@@ -1,15 +1,17 @@
 .partner--bionic {
+  $primary-color: #1370FF;
+
   --button-border-radius: 6px;
   --button-border: none;
 
-  --button-primary-background-color: #1370FF;
+  --button-primary-background-color: #{$primary-color};
   --button-primary-color: white;
   --button-primary-hover-background-color: #005DED;
   --button-primary-hover-color: white;
 
   --button-secondary-background-color: white;
-  --button-secondary-border: 2px solid #1370FF;
-  --button-secondary-color: #1370FF;
+  --button-secondary-border: 2px solid #{$primary-color};
+  --button-secondary-color: #{$primary-color};
 
   --button-large-padding: 12px 24px;
 }
