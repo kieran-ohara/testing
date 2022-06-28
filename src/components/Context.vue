@@ -3,7 +3,7 @@ import './partners/bionic.css';
 import './partners/default.css';
 import './partners/moneysupermarket.css';
 
-import { provide, readonly, reactive } from 'vue';
+import { provide, readonly, reactive }  from 'vue';
 const props = defineProps([
   'overridepartner',
   'static'
@@ -26,12 +26,13 @@ const json = await response.json();
 const state = reactive({
   partner: json.json.partner,
 })
+
 // dont actually need this
 /* provide('context', readonly(state)); */
 </script>
 
 <template>
-  <div :partner="state.partner">
+  <div :class="`partner--${state.partner}`">
     <slot></slot>
   </div>
 </template>

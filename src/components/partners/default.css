@@ -1,4 +1,4 @@
-[partner=default], :root {
+.partner--default, :root {
   --button-border-radius: 3em;
   --button-border: 1px solid;
 
