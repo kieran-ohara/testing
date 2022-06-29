@@ -13,11 +13,15 @@
   },
   "dependencies": {
     "@formkit/vue": "^1.0.0-beta.8",
+    "@vendia/serverless-express": "^4.8.2",
     "express": "^4.18.1",
-    "sass": "^1.53.0",
-    "vue": "^3.2.36"
+    "vue": "^3.2.36",
+    "vite": "^2.9.9"
   },
   "devDependencies": {
+    "source-map-support": "^0.5.21",
+    "aws-cdk-lib": "2.29.1",
+    "constructs": "^10.0.0",
     "@babel/core": "^7.18.5",
     "@mdx-js/react": "^1.6.22",
     "@storybook/addon-actions": "^6.5.9",
@@ -27,11 +31,19 @@
     "@storybook/builder-vite": "^0.1.36",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/vue3": "^6.5.9",
+    "@types/jest": "^27.5.2",
+    "@types/node": "10.17.27",
+    "@types/prettier": "2.6.0",
     "@vitejs/plugin-vue": "^2.3.3",
+    "aws-cdk": "2.29.1",
     "babel-loader": "^8.2.5",
     "chromatic": "^6.6.4",
+    "jest": "^27.5.1",
     "postcss-nesting": "^10.1.9",
-    "vite": "^2.9.9",
+    "sass": "^1.53.0",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.8.1",
+    "typescript": "~3.9.7",
     "vue-loader": "^16.8.3"
   },
   "readme": "ERROR: No README data found!",
