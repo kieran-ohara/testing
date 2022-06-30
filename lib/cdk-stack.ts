@@ -7,6 +7,7 @@ export class CdkStack extends Stack {
     super(scope, id, props);
     const lambdaFn = new lambda.DockerImageFunction(this, 'AssetFunction', {
       code: lambda.DockerImageCode.fromImageAsset('.'),
+      architecture: lambda.Architecture.ARM_64,
     });
     lambdaFn.addFunctionUrl({
       authType: lambda.FunctionUrlAuthType.NONE
