@@ -12,16 +12,21 @@ COPY . .
 RUN npm run build:client && npm run build:server
 
 FROM public.ecr.aws/lambda/nodejs:14
+# FROM node:alpine
 
-ENV NODE_ENV=prod
+ENV NODE_ENV=production
 
-COPY --from=build /build/package.json ${LAMBDA_TASK_ROOT}
-COPY --from=build /build/package-lock.json ${LAMBDA_TASK_ROOT}
+WORKDIR ${LAMBDA_TASK_ROOT}
+
+COPY --from=build /build/package.json .
+COPY --from=build /build/package-lock.json .
 RUN npm ci --production --force
 
-COPY --from=build /build/index.js ${LAMBDA_TASK_ROOT}
-COPY --from=build /build/server.js ${LAMBDA_TASK_ROOT}
-COPY --from=build /build/serverless.js ${LAMBDA_TASK_ROOT}
-COPY --from=build /build/dist ${LAMBDA_TASK_ROOT}
+COPY --from=build /build/dist dist
+COPY --from=build /build/index.html index.html
+COPY --from=build /build/index.js index.js
+COPY --from=build /build/server.js server.js
+COPY --from=build /build/serverless.js serverless.js
+COPY --from=build /build/src src
 
 CMD [ "serverless.handler" ]
