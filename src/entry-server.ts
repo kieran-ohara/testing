@@ -8,7 +8,10 @@ const render = async (url, manifest) => {
   // router.push(url);
   // await router.isReady()
 
-  const ctx = {}
+  const ctx = {
+    "hi": "somecontext",
+  }
+
   const appHtml = await renderToString(app, ctx);
 
   // const preloadLinks = renderPreloadLinks(ctx.modules, manifest)

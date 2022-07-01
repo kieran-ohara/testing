@@ -1,11 +1,13 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 
 const step = ref('postcode')
 
 const setStep = () => {
   step.value = 'service';
 }
+
+const context = inject('context')
 
 const submitApp = async (formData) => {
   console.log(formData);
@@ -27,6 +29,7 @@ const submitApp = async (formData) => {
 </style>
 
 <template>
+  <h1>partner is {{ context.partner }}</h1>
   <FormKit
     type="form"
     #default="{ value }"

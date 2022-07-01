@@ -1,13 +1,24 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import Context from './components/Context.vue'
 </script>
 
 <template>
 
   <main>
-    <TheWelcome />
+    <Suspense>
+      <template #fallback>
+        <p>loading</p>
+      </template>
+      <template #default>
+        <Context>
+          <TheWelcome />
+        </Context>
+      </template>
+    </Suspense>
   </main>
+
 </template>
 
 <style>
