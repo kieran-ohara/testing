@@ -36,7 +36,7 @@ const createDevelopmentServer = async (server) => {
 
       const html = template
         .replace('<!--ssr-render-->', appHtml)
-        .replace('<!--preload-links-->', preloadedLinks);
+        .replace('<!--preload-links-->', preloadedLinks)
         .replace('/* CONTEXT */', `window.__CONTEXT=${JSON.stringify(serverContext)}`);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
@@ -63,7 +63,7 @@ const createProductionServer = async (server) => {
 
     const html = template
       .replace('<!--ssr-render-->', appHtml)
-      .replace('<!--preload-links-->', preloadedLinks);
+      .replace('<!--preload-links-->', preloadedLinks)
       .replace('/* CONTEXT */', `window.__CONTEXT=${JSON.stringify(serverContext)}`);
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
