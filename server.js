@@ -32,7 +32,7 @@ const createDevelopmentServer = async (server) => {
       const manifest = {}
 
       const { render } = await viteServer.ssrLoadModule(resolve('src/entry-server.ts'))
-      const [appHtml, preloadedLinks] = await render(url, manifest);
+      const [appHtml, preloadedLinks] = await render(url, manifest, serverContext);
 
       const html = template
         .replace('<!--ssr-render-->', appHtml)
@@ -59,7 +59,7 @@ const createProductionServer = async (server) => {
     const manifest = require(resolve('${__dist/client/ssr-manifest.json'));
 
     const { render } = require(resolve('${__dist/server/entry-server.js'));
-    const [appHtml, preloadedLinks] = await render(url, manifest);
+    const [appHtml, preloadedLinks] = await render(url, manifest, serverContext);
 
     const html = template
       .replace('<!--ssr-render-->', appHtml)
