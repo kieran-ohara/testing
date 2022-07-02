@@ -24,20 +24,33 @@ async function fetchContextClient() {
   return json.json;
 }
 
+function objectEmpty(obj: object): boolean {
+  return (
+    obj
+    && Object.keys(obj).length === 0
+    && Object.getPrototypeOf(obj) === Object.prototype
+  )
+}
+
+let memiozedContext = null;
+
 export default async function useContext(): Promise<contextInterface> {
 
-  const context = inject('context')
-
-  const reactiveContext = reactive({
-    partner: context?.partner ?? null
-  });
-
-  if(!reactiveContext.partner) {
-    if (!import.meta.env.SSR) {
-      const { partner: remotePartner } = await fetchContextClient();
-      reactiveContext.partner = 'client-value';
-    }
+  if (memiozedContext !== null) {
+    console.log('Using Memiozed Context')
+    return memiozedContext;
   }
 
-  return readonly(reactiveContext);
+  const context = inject('context');
+  if (!objectEmpty(context)) {
+    console.log('Using Server-Rendered Context')
+    memiozedContext = readonly(context);
+    return memiozedContext;
+  }
+
+  if (!import.meta.env.SSR) {
+    console.log('Using Remote Context')
+    memiozedContext = readonly(reactive(await fetchContextClient()));
+    return memiozedContext;
+  }
 }

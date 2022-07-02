@@ -8,7 +8,7 @@ const setStep = () => {
 }
 
 import useContext from './context-composable';
-const { partner } = await useContext();
+const context = await useContext();
 
 const submitApp = async (formData) => {
   console.log(formData);
@@ -30,7 +30,7 @@ const submitApp = async (formData) => {
 </style>
 
 <template>
-  <h1>partner is {{ partner }}</h1>
+  <h1>partner is {{ context?.partner }}</h1>
   <FormKit
     type="form"
     #default="{ value }"
