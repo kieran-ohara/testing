@@ -5,6 +5,10 @@ const path = require('path');
 
 const resolve = (p) => path.resolve(__dirname, p)
 
+const serverContext = {
+  partner: 'server-partner'
+};
+
 const createDevelopmentServer = async (server) => {
   const viteServer = await vite.createServer({
     root: process.cwd(),
@@ -33,6 +37,7 @@ const createDevelopmentServer = async (server) => {
       const html = template
         .replace('<!--ssr-render-->', appHtml)
         .replace('<!--preload-links-->', preloadedLinks);
+        .replace('/* CONTEXT */', `window.__CONTEXT=${JSON.stringify(serverContext)}`);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
@@ -59,6 +64,7 @@ const createProductionServer = async (server) => {
     const html = template
       .replace('<!--ssr-render-->', appHtml)
       .replace('<!--preload-links-->', preloadedLinks);
+      .replace('/* CONTEXT */', `window.__CONTEXT=${JSON.stringify(serverContext)}`);
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
   });
