@@ -59,10 +59,11 @@ const createProductionServer = async (server) => {
   server.use('*', async (req, res, next) => {
     const url = req.originalUrl;
 
-    const template = readFileSync(resolve('${__dist/client/index.html'), 'utf-8');
-    const manifest = require(resolve('${__dist/client/ssr-manifest.json'));
+    const template = readFileSync(resolve('dist/client/index.html'), 'utf-8');
+    // const manifest = require(resolve('dist/client/ssr-manifest.json'));
+    const manifest = {}
 
-    const { render } = require(resolve('${__dist/server/entry-server.js'));
+    const { render } = require(resolve('dist/server/entry-server.js'));
     const [appHtml, preloadedLinks] = await render(url, manifest, serverContext(req));
 
     const html = template
