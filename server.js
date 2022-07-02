@@ -54,7 +54,7 @@ const createDevelopmentServer = async (server) => {
 }
 
 const createProductionServer = async (server) => {
-  server.use(express.static('dist/client'));
+  server.use(express.static('dist/client', {index: false}));
 
   server.use('*', async (req, res, next) => {
     const url = req.originalUrl;
