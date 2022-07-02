@@ -5,8 +5,12 @@ const path = require('path');
 
 const resolve = (p) => path.resolve(__dirname, p)
 
-const serverContext = {
-  partner: 'server-partner'
+const serverContext = (req) => {
+  const response = {};
+  if (req.query.partner) {
+    response.partner = req.query.partner
+  }
+  return response
 };
 
 const createDevelopmentServer = async (server) => {
@@ -32,12 +36,12 @@ const createDevelopmentServer = async (server) => {
       const manifest = {}
 
       const { render } = await viteServer.ssrLoadModule(resolve('src/entry-server.ts'))
-      const [appHtml, preloadedLinks] = await render(url, manifest, serverContext);
+      const [appHtml, preloadedLinks] = await render(url, manifest, serverContext(req));
 
       const html = template
         .replace('<!--ssr-render-->', appHtml)
         .replace('<!--preload-links-->', preloadedLinks)
-        .replace('/* CONTEXT */', `window.__CONTEXT=${JSON.stringify(serverContext)}`);
+        .replace('/* CONTEXT */', `window.__CONTEXT=${JSON.stringify(serverContext(req))}`);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
@@ -59,12 +63,12 @@ const createProductionServer = async (server) => {
     const manifest = require(resolve('${__dist/client/ssr-manifest.json'));
 
     const { render } = require(resolve('${__dist/server/entry-server.js'));
-    const [appHtml, preloadedLinks] = await render(url, manifest, serverContext);
+    const [appHtml, preloadedLinks] = await render(url, manifest, serverContext(req));
 
     const html = template
       .replace('<!--ssr-render-->', appHtml)
       .replace('<!--preload-links-->', preloadedLinks)
-      .replace('/* CONTEXT */', `window.__CONTEXT=${JSON.stringify(serverContext)}`);
+      .replace('/* CONTEXT */', `window.__CONTEXT=${JSON.stringify(serverContext(req))}`);
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
   });
