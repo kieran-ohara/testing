@@ -12,6 +12,7 @@ const render = async (url, manifest, serverContext) => {
     "hi": "somecontext",
   }
 
+  app.provide('context', serverContext);
   const appHtml = await renderToString(app, ctx);
 
   // const preloadLinks = renderPreloadLinks(ctx.modules, manifest)
