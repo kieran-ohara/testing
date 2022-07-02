@@ -8,12 +8,8 @@ const render = async (url, manifest, serverContext) => {
   // router.push(url);
   // await router.isReady()
 
-  const ctx = {
-    "hi": "somecontext",
-  }
-
   app.provide('context', serverContext);
-  const appHtml = await renderToString(app, ctx);
+  const appHtml = await renderToString(app);
 
   // const preloadLinks = renderPreloadLinks(ctx.modules, manifest)
   return [appHtml, []]//preloadLinks]
